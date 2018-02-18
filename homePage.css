@@ -1,0 +1,50 @@
+
+#HomePage {
+  background-color: black;
+}
+
+#MainLogo {
+  right: 25%;
+  left: 25%;
+  position: relative;
+}
+
+#homePageIcon {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 25%;
+  right: 25%;
+}
+
+
+.logoLI {color:limegreen ; display:inline-block; font-size: 80px; font-family:"Monda"; font-weight: blod;
+  letter-spacing: 7px; text-shadow: 0 0 67px white, 0 0 80px limegreen; }
+
+.logoUL {margin: auto}
+
+.logoLI:nth-child(3) {transform: rotate(15deg) translateY(4px); animation: neon 1s infinite;}
+
+.logoLI:nth-child(7) {transform: rotate(15deg) translateY(4px); animation: neon 0.9s infinite;}
+
+  @keyframes neon
+  {0% {opacity: 0; }
+      5% { opacity: 1;}
+      20% {opacity:1;}
+      25% {opacity: 0.5;}
+      30% {opacity: 0.5;}
+      32% {opacity: 1;}
+      45% {opacity: 1;}
+      46% {opacity: 0.5;}
+      54% {opacity: 0.5;}
+      55% {opacity: 1;}
+      77% {opacity: 1;}
+      78% {opacity: 0;}
+      88% {opacity: 0;}
+      90% {opacity: 1;}
+      93% {opacity: 1;}
+      95% {opacity: 0;}
+      97% {opacity: 0;}
+      98% {opacity: 1;}
+      100% {opacity: 1;}
+  }
