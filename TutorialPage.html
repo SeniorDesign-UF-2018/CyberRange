@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta content="text/html" charset="utf-8">
+    <meta name="Cyber Range" content="penetration testing">
+    <title>Tutorial Page</title>
+    <!-- stylsheets needed -->
+    <link rel="stylesheet" href="tutorialPage.css">
+  </head>
+
+  <body>
+    <!-- Branding Area ofthe webpage that contains banner image -->
+    <!-- Also toolbar could go here -->
+    <div id="header">
+        <div id="logoBox"></div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="TutorialPage.html">Tutorials</a></li>
+          <li><a href="About.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- container that holds all of the contents of webpage -->
+    <div id="page-container">
+
+      <div id="content">
+
+        <!-- This is where the selected VM content will be displayed -->
+        <div id="right-content">
+            <!-- Where we display VM content -->
+            <div id="target">
+              <!--example of how the content is structured -->
+              <h2>Rick n Morty Walkthrough</h2>
+              <div id="stars">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia consectetur ex nec rutrum. Etiam fringilla sed lorem eget vulputate. Proin lacinia magna vel tortor ullamcorper maximus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc quis purus velit. Quisque lacinia iaculis porta. Praesent tincidunt diam vel tellus sagittis, a aliquam massa facilisis. Ut faucibus eros lacinia, aliquet justo ut, dictum neque. In hac habitasse platea dictumst. Duis placerat, enim quis sollicitudin placerat, orci quam aliquam erat, ac scelerisque nisi quam ultricies ligula. </p>
+              <!--<div class="download_button">Download</div>
+              <div class="walkthrough_button">Walkthrough</div>
+            -->
+              <input type="button" class="download_button" value="Download"/>
+              <input type="button" class="walkthrough_button" value="Walkthrough"/>
+            </div>
+        </div>
+
+        <!-- This is where the list of VMs will be displayed -->
+        <div id="vm_menu">
+          <h2>Select a VM to view more details</h2>
+          <div id="vm_list">
+            <!-- Example of what content looks like
+            <div class="vm_list_border vm_list_item" id="vm1">Walkthrough1</div>
+          -->
+          </div>
+        <div>
+
+      </div> <!-- End of content div -->
+
+
+    </div> <!-- End of page-container div -->
+
+    <!-- scripts that are needed to provide functionality -->
+    <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="TutorialPage.js" type="text/javascript"></script>
+
+  </body>
+</html>

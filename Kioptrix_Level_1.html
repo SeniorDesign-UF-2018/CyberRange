@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta content="text/html" charset="utf-8">
+    <meta name="Cyber Range" content="penetration testing">
+    <title>Kioptrix Level 1</title>
+    <!-- stylsheets needed -->
+    <link rel="stylesheet" href="Walkthrough.css">
+  </head>
+
+  <body>
+    <!-- Branding Area ofthe webpage that contains banner image -->
+    <!-- Also toolbar could go here -->
+    <div id="header">
+        <div id="logoBox"></div>
+        <ul id="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="TutorialPage.html">Tutorials</a></li>
+          <li><a href="About.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- container that holds all of the contents of webpage -->
+    <div id="page-container">
+
+      <div id="content">
+        <!-- Walkthrough content is held here -->
+        <h3>Phase 1 Recon: Collecting information about the target</h3>
+        <p>Get our <span class="red-highlight">IP</span> by using <span class="blue-highlight">ifconfig</span>, and then
+           use <span class="blue-highlight">nmap</span> to scan the range of possible IP's.</p>
+        <img src="./images/Kioptrix_Level_1/pic1.png" height="400" width="900">
+        <img src="./images/Kioptrix_Level_1/pic2.png" height="400" width="900">
+        <p> We can see now that the target IP is: 192.168.232.133</p>
+
+        <h3>Phase 2 Scanning: Discover OS, open ports, and running services</h3>
+        <p>Now we can use <span class="blue-highlight">nmap</span> to scan the open ports on our target.
+           Sometimes the -A tool can produce an overwhelming amount of results, but because there are only
+           6 ports open on the target machine we can use it to gather a large amount of information quickly.</p>
+        <img src="./images/Kioptrix_Level_1/pic3.png" height="400" width="900">
+        <p>Here we see the open <span class="red-highlight">ports</span>, the services that they are running, and
+           the operating system. We know the:</p>
+        <ul>
+          <li>Open Ports</li>
+          <ul>
+            <li>Port 22: <span class="red-highlight">Secure Shell</span> for remote access to the terminal</li>
+            <li>Port 80: Standard port used for web servers, this one is running an <span class="red-highlight">Apache</span> web server v. 1.3.20</li>
+            <li>Port 111: Used for <span class="red-highlight">rpcbind</span>, a utility that maps remote procedure calls(RPCs) to their corresponding addresses onthe server in order to carry out function calls.</li>
+            <li>Port 139: This port is being used to run a file/printer sharing service called <span class="red-highlight">Samba</span>.</li>
+            <li>Port 443: This is another port serving a webpage with the same informationas port 80</li>
+          </ul>
+          <li>Operating System</li>
+          <ul>
+            <li>We seethat the machine is running a version of Linux 2.4.x. From what we gathered from the ports serving webpages, it's likely that this machine is running a version of Red Hat Linux.</li>
+          </ul>
+        </ul>
+        <h3>Phase 3 Enumeration: Another way of gathering info.</h3>
+        <p>A more active way of gathering information, is by connecting to potentially more vunerable ports in order to gain more data about the machine</p>
+        <ul>
+          <li>Port 80: HTTP/Web</li>
+        </ul>
+        <p>Let's start with visiting the webpage.</p>
+        <img src="./images/Kioptrix_Level_1/pic4.png" height="400" width="900">
+        <p>Most of the links didn't work, leading to Page Not Found errors. These pages that do work
+           seemed to mostly contain documentation about the <span class="red-highlight">Apache</span> web server.
+           For good measure lets run <span class="red-highlight">Dirb</span>.</p>
+        <img src="./images/Kioptrix_Level_1/pic5.png" height="400" width="900">
+        <p>We can see that <span class="red-highlight">Dirb</span> was not able to reach the links with sensitive information.</p>
+        <ul>
+          <li>Port 139: Samba server</li>
+        </ul>
+        <p>Samba is a service for file and printer sharing between Linux and Windows machines, using the <span class="red-highlight">SMB/CIFS</span> protocol.
+           In this case Samba is running over the NetBIOS API, programs for communication between computers, because this is a Linux machine.
+           If this were setup for communication between two Windows machines we would not need NetBIOS and Samba would run on port 445.
+           This is the reason why our initial scan showed it as netbios-ssn (netbios session).We can use <span class="red-highlight">smbclient</span>, which
+           is very similar to ftp, to test connectivity to the server.</p>
+        <img src="./images/Kioptrix_Level_1/pic6.png" height="400" width="900">
+        <p>Now that we know the version of Samba that is running, we can use a tool called <span class="red-highlight">Searchsploit</span> to check if
+           there is an existing vulnerability. Searchsploit searches Exploit-DB,a comprehensive archive of pubblic exploits, on the keywords present in
+           the expression. E.g.) samba version 2.2. Searchsploit operates on an AND operator, this means it will ALWAYS filter more results.
+           Use <span class="blue-highlight">grep</span> to filter the output for OR expressions.</p>
+        <img src="./images/Kioptrix_Level_1/pic7.png" height="400" width="900">
+        <p>The second search result looks to be what we are looking for. It is Samba Remote Root Exploit that works on versions up to 2.2.8.
+           The target server is using version 2.2.1 so it's safe to assume this will work on the server. The second column contains the rest of the path
+           to the exploit: ./linux/remote/10.c. From this path we can see that the exploit works for linuxand is executed remotely. Once we choose an
+           exploit, we can copy it to our root folder by using <span class="blue-highlight">cp</span> and appending the path from the exploit to the path that
+           is listed at the top of the second column.</p>
+        <img src="./images/Kioptrix_Level_1/pic8.png" height="400" width="900">
+        <h3>Phase 4: Gaining Access: Getting credentials to gain ownership.</h3>
+        <p>Now that the exploit is in our root folder we can use any text editor to open the file and view the program, <span class="red-highlight">Gedit<span> is
+           used in this example.</p>
+        <img src="./images/Kioptrix_Level_1/pic9.png" height="400" width="900">
+        <p>The second command at the bottom is what tells us how to run this for Linux. Now we are ready to compile and run the exploit.</p>
+        <img src="./images/Kioptrix_Level_1/pic10.png" height="400" width="900">
+        <p>By typing in the command <span class="red-highlight">whoami</span> we can see that we have root privileges in the Samba server. We have successfully
+           connected to the Samba server, but because we are in a Samba shell, we are not able to use the full range of commands that are typically on a Linux machine.
+           This means that we should set up a <span class="red-highlight">reverse shell</span>, in which the target connects back to our attack box, to more easily navigate
+           through the system and get a full range of capabilities. We can do this by setting up a listener on our attack box by using <span class="red-highlight">netcat</span>.
+           Netcat is not installed on the target box, but we can connect back to our attack box using a <span class="red-highlight">bash script</span>.</p>
+        <img src="./images/Kioptrix_Level_1/pic11.png" height="400" width="900">
+        <p>As a final step, lets add a user to the system to establish <span class="red-highlight">persistence</span>, in case the Samba vulnerability gets patched, and we
+           are unable to use our exploit to get in. <span class="blue-highlight">Useradd</span> can usually be ran directly from the command line but in this case we cannot,
+           probably because the directory is not in the root user's path. Therefore, we can execute the command using the full path of the binary. Lets try to create a super
+           user, using the -ou flag to set our user id and -g to set our group id as 0 (root), named testing followed by the <span class="blue-highlight">passwd</span> command
+           to set the password to shhh.</p>
+        <img src="./images/Kioptrix_Level_1/pic12.png" height="400" width="900">
+        <p>Now we can login to the machine whether the Samba server gets patched or not.</p>
+        <img src="./images/Kioptrix_Level_1/pic13.png" height="400" width="900">
+      </div> <!-- End of content div -->
+    </div> <!-- End of page-container div -->
+
+    <!-- scripts that are needed to provide functionality -->
+    <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
+
+  </body>
+</html>
