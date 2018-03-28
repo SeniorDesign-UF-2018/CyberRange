@@ -82,3 +82,7 @@ html, body {
 .red-highlight {
   color: red;
 }
+
+h1 {
+  text-align: center;
+}
