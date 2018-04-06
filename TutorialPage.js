@@ -1,14 +1,21 @@
 //list of vm walkthrough objects
 //this is what you add to display a new walkthrough object
-var vm1 = {title:"RickdiculouslyEasy", difficulty:3, down_link:"https://download.vulnhub.com/rickdiculouslyeasy/RickdiculouslyEasy.zip", walk_link:"rickAndMortyVM.html", description: "Lorem1 ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia consectetur ex nec rutrum. Etiam fringilla sed lorem eget vulputate. Proin lacinia magna vel tortor ullamcorper maximus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc quis purus velit. Quisque lacinia iaculis porta. Praesent tincidunt diam vel tellus sagittis, a aliquam massa facilisis. Ut faucibus eros lacinia, aliquet justo ut, dictum neque. In hac habitasse platea dictumst. Duis placerat, enim quis sollicitudin placerat, orci quam aliquam erat, ac scelerisque nisi quam ultricies ligula."}
+var vm1 = {title:"Rickdiculously Easy", difficulty:3, down_link:"https://download.vulnhub.com/rickdiculouslyeasy/RickdiculouslyEasy.zip", walk_link:"rickAndMortyVM.html", description: "Lorem1 ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia consectetur ex nec rutrum. Etiam fringilla sed lorem eget vulputate. Proin lacinia magna vel tortor ullamcorper maximus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc quis purus velit. Quisque lacinia iaculis porta. Praesent tincidunt diam vel tellus sagittis, a aliquam massa facilisis. Ut faucibus eros lacinia, aliquet justo ut, dictum neque. In hac habitasse platea dictumst. Duis placerat, enim quis sollicitudin placerat, orci quam aliquam erat, ac scelerisque nisi quam ultricies ligula."}
 
-var vm2 = {title:"Kioptrix Level 1", difficulty:2, down_link:"http://www.kioptrix.com/dlvm/Kioptrix_Level_1.rar", walk_link:"Kioptrix_Level_1.html", description: "Lorem2 ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia consectetur ex nec rutrum. Etiam fringilla sed lorem eget vulputate. Proin lacinia magna vel tortor ullamcorper maximus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc quis purus velit. Quisque lacinia iaculis porta. Praesent tincidunt diam vel tellus sagittis, a aliquam massa facilisis. Ut faucibus eros lacinia, aliquet justo ut, dictum neque. In hac habitasse platea dictumst. Duis placerat, enim quis sollicitudin placerat, orci quam aliquam erat, ac scelerisque nisi quam ultricies ligula."}
+var vm2 = {title:"Kioptrix Level 1", difficulty:2, down_link:"http://www.kioptrix.com/dlvm/Kioptrix_Level_1.rar", walk_link:"Kioptrix_Level_1.html", description: "This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges."}
+
+var vm3 = {title:"Kioptrix Level 2", difficulty:2, down_link:"http://www.kioptrix.com/dlvm/Kioptrix_Level_2.rar", walk_link:"Kioptrix_Level_2.html", description: "This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges."}
+
+var vm4 = {title:"Kioptrix Level 3", difficulty:2, down_link:"http://www.kioptrix.com/dlvm/KVM3.rar", walk_link:"Kioptrix_Level_3.html", description:"This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges."}
+
+var vm5 = {title:"Lazy Sys Admin 1", difficulty:2, down_link:"https://www.vulnhub.com/entry/lazysysadmin-1,205/", walk_link:"Lazy_Sys_Admin_1.html", description: "Learn the basics of enumeration and the different tools that make finding vulnerabilities possible while introducing basic concepts needed when attempting to attain root access of a machine on your network. This exersise also illustrates the value of first trying the quick and straight foward possibilities before investing time in the long and complex even if it seems too good too be true since lazy mistakes sometimes happen in the real world too."}
+
 
 
 //array to store all of the vm walkthroughs
-var all_VMs = [vm1, vm2];
+var all_VMs = [vm1, vm2, vm3, vm4, vm5];
 
-//initial vm
+//FEATURED VM
 var current_VM = all_VMs[0];
 
 //fill vm_list with available VMs

@@ -83,6 +83,10 @@ html, body {
   color: red;
 }
 
+.green-highlight {
+  color: green;
+}
+
 h1 {
   text-align: center;
 }

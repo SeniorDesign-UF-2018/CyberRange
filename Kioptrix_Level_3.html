@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta content="text/html" charset="utf-8">
+    <meta name="Cyber Range" content="penetration testing">
+    <title>Kioptrix Level 3</title>
+    <!-- stylsheets needed -->
+    <link rel="stylesheet" href="Walkthrough.css">
+  </head>
+
+  <body>
+    <!-- Branding Area ofthe webpage that contains banner image -->
+    <!-- Also toolbar could go here -->
+    <div id="header">
+        <div id="logoBox"></div>
+        <ul id="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="TutorialPage.html">Tutorials</a></li>
+          <li><a href="About.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- container that holds all of the contents of webpage -->
+    <div id="page-container">
+
+      <h1>Kioptrix Level 3</h1>
+
+      <div id="content">
+        <!-- Walkthrough content is held here -->
+        <h3>Phase 1 Recon: Collecting information about the target</h3>
+        <p>Get our <span class="red-highlight">IP</span> by using <span class="blue-highlight">ifconfig</span>, and then
+           use <span class="blue-highlight">nmap</span> to scan the range of possible IP's.</p>
+        <img src="./images/Kioptrix_Level_3/pic1.png" height="400" width="900">
+        <p>We can see now that the target IP is 192.168.232.140.</p>
+
+        <h3>Phase 2 Scanning: Discover OS, open ports, and running services</h3>
+        <p>Now we can use <span class="blue-highlight">nmap</span> to perform a more in-depth scan on our targets open ports.</p>
+        <img src="./images/Kioptrix_Level_3/pic2.png" height="400" width="900">
+        <p>Here we see the open <span class="red-highlight">ports</span>, the services that they are running, and
+           the operating system. We know the:</p>
+        <ul>
+          <li>Open Ports</li>
+          <ul>
+            <li>Port 22: <span class="red-highlight">Secure Shell</span> for remote access to the terminal</li>
+            <li>Port 80: Standard port used for web servers, this one is running an <span class="red-highlight">Apache</span> v.2.2.8.</li>
+          </ul>
+          <li>Operating System</li>
+          <ul>
+            <li>o	We see that the machine is running a version of Linux 2.6.x. By looking at both of the open ports we can make an educated guess that this machine is running a flavor of Linux called Ubuntu. We could be wrong but this might be useful, and we can confirm later on.</li>
+          </ul>
+        </ul>
+
+        <h3>Phase 3 Enumeration:  A more active way of gathering information</h3>
+        <p>We will now be connecting to potentially vulnerable ports to gather more information about our target machine.</p>
+        <ul>
+          <li>Port 80: HTTP/WEB<li>
+        </ul>
+        <p>Let's start with visting the webpage.</p>
+        <img src="./images/Kioptrix_Level_3/pic3.png" height="400" width="900">
+        <p>Clicking through tabs, most of the links didn’t serve any useful pages, they brought you to advertisement pages. The login page proved more useful.</p>
+        <img src="./images/Kioptrix_Level_3/pic4.png" height="400" width="900">
+        <p>SQLInjection into the form doesn’t work, so lets shift focus onto the banner at the bottom of the form, LotusCMS. What is LotusCMS? Google tells us that it is a open source content manager. It looks like it hasn’t been updated in some time, and that it’s a fairly unused system, perfect for exploitation. Searchsploit returns an overwhelming amount of results for lotuscms so lets try Google. Searching Google the first result that comes up is:</p>
+        <img src="./images/Kioptrix_Level_3/pic5.png" height="400" width="900">
+        <img src="./images/Kioptrix_Level_3/pic6.png" height="400" width="900">
+        <p>The video is very informative about how Hood3dRob1n wrote the script and includes an example of how to use it. We are looking for remote command execution, so this looks like it could be great. Following the instructions in the video let’s download the exploit and run.</p>
+
+        <h3>Phase 4: Gaining Access: Getting usernames, passwords, and other credentials to gain ownership of anything</p>
+        <img src="./images/Kioptrix_Level_3/pic7.png" height="400" width="900">
+        <img src="./images/Kioptrix_Level_3/pic8.png" height="400" width="900">
+        <p>Navigating through the shell certain commands aren’t working (marked by red x’s), and we cant see our path on the left side of the screen like normal. These are indications that this is a what some call a <span class="red-highlight">"dumb" shell</span>, meaning it isn’t fully interactive. We can upgrade our shell into a pseudo-terminal, shell that acts like the terminal, using a script for python (1) <span class="blue-highlight">python -c ‘import pty; pty.spawn(“bin/bash”)’</span>.
+          This python script imports the <span class="blue-highlight">pty</span> module, used for pseudo-terminals, and its <span class="blue-highlight">spawn</span> function to create a bin/bash “terminal” and connect it back to the controlling shell. Clear still isn’t working but judging from the error this is fixable by setting the TERM variable to xterm using <span class="blue-highlight">export TERM=xterm</span>.</p>
+        <img src="./images/Kioptrix_Level_3/pic9.png" height="400" width="900">
+        <p>Now that we have a mostly complete terminal we can more easily navigate through the system. Backing out of the file system, two steps deep, there is some interesting information.</p>
+        <img src="./images/Kioptrix_Level_3/pic10.png" height="400" width="900">
+        <p>In loneferret’s folder there is a readme file that mentions a text editor called ht that is run with root priviledges, and refers to them as a employee. This could be important for later. After some searching cd back to /home/www/kioptrix3.com and lets try using <span class="blue-highlight">grep “password” ./*/*</span> and see what we find.</p>
+        <img src="./images/Kioptrix_Level_3/pic11.png" height="400" width="900">
+        <p>Let’s change directories, <span class="blue-highlight">cd</span>, to the gallery file and cat <span class="blue-highlight">gconfig.php</span>.</p>
+        <img src="./images/Kioptrix_Level_3/pic12.png" height="400" width="900">
+        <p>In the file there is login information with a username and a password, now we can login to the mysql database using <span class="blue-highlight">mysql -u root -p</span>.</p>
+        <img src="./images/Kioptrix_Level_3/pic13.png" height="400" width="900">
+        <p>From here we can try to find any username and password combinations stored in the database. Since we are in a <span class="red-highlight">MySQL</span> database we will use <span class="red-highlight">SQL</span> to navigate through the database.</p>
+        <img src="./images/Kioptrix_Level_3/pic14.png" height="400" width="900">
+        <p>Using <span class="blue-highlight">show databases;</span> we see all of the different databases being managed. Schemas are a type of blueprint for objects in a particular database usually define attributes, and value types. Let’s skip that for now and go into the gallery database. We can do this by typing <span class="blue-highlight">use gallery;</span> Now we can use <span class="blue-highlight">show tables;</span> to see the different tables that are being stored in the database.</p>
+        <img src="./images/Kioptrix_Level_3/pic15.png" height="400" width="900">
+        <p>Gallarific_users and dev_accounts look like the most promising place to start. We can use <span class="blue-highlight">select * from gallarific_users;</span> to view the information in the gallarific_users table, the * meaning all.</p>
+        <img src="./images/Kioptrix_Level_3/pic16.png" height="400" width="900">
+        <p>While gallarific_users didn’t have much useful information, dev_accounts did have a couple users and what appears to be their hashed passwords. We could use a Kali tool to decrypt the password, but lets save some time and see if popular online tool called CrackStation.com will work for us. Let’s try loneferret’s password on the hunch the dregs will not be useful. This is because earlier loneferret was refereed to as an employee and was a non-empty folder. Dregs folder did not contain anything useful.</p>
+        <img src="./images/Kioptrix_Level_3/pic17.png" height="400" width="900">
+        <p>Awesome, now that we have the password, starwars, lets see if it will let us ssh into loneferret’s account. Use <span class="blue-highlight">ssh loneferret@192.168.232.140</span> to remotely access the account and typing in the password when prompted.</p>
+        <img src="./images/Kioptrix_Level_3/pic18.png" height="400" width="900">
+        <p>Awesome now that we are in lets figure out how to get root. Since we are in loneferrets home the CompanyPolicy.README is the first thing that we see. This ht program sounds important so let’s locate it first.</p>
+        <img src="./images/Kioptrix_Level_3/pic19.png" height="400" width="900">
+        <p>Running it as root we see that you can access any file on the system and write to it. One way to establish persistence and take root, is to edit the <span class="blue-highlight">~/.ssh/authorized_keys</span> file. <span class="red-highlight">SSH (Secure Shell)</span> is a secure connection between a client and server that uses SSH Protocol to secure data between sender and receiver. <span class="red-highlight">Public Key Authentication</span> is one of the methods by which SSH does this by encrypting keys using an algorithm, RSA or DSA. There are two keys that are generated, one public and one private. The <span class="red-highlight">public key</span> an be distributed to any server, as a way of letting the server know that the client is secure, and is stored in an authorized_keys file. The <span class="red-highlight">private key</span> is only owned by the user, to be used for authentication
+          by the server with the public key. The public key sends encrypted data to the private key, that is decrypted on successful authentication. Ht has access to write to any file on the system, so we can edit the target’s <span class="blue-highlight">~/.ssh/authorized_keys</span> file to include a public key that we generated.</p>
+        <p>Lets start by creating a public key using the RSA algorithm. The command is <span class="blue-highlight">ssh-keygen -t rsa</span>.</p>
+        <img src="./images/Kioptrix_Level_3/pic20.png" height="400" width="900">
+        <p>Now we can navigate to  ~/.ssh and <span class="blue-highlight">cat id_rsa.pub</span> to copy/paste into the targets ~/.ssh/authorized_keys.<p>
+        <img src="./images/Kioptrix_Level_3/pic21.png" height="400" width="900">
+        <p>Now running <span class="blue-highlight">sudo ht</span> opens this window.</p>
+        <img src="./images/Kioptrix_Level_3/pic22.png" height="400" width="900">
+        <p>You can use the tabs by pressing alt+(the first letter of the tab). Navigating to /root/.ssh, pressing alt+f to open the file menu and then using the arrow keys to go to Open and then typing /root/. ssh, there was no authorized_key file. So lets make a new one by pressing alt+f, and hitting enter to get to New.</p>
+        <img src="./images/Kioptrix_Level_3/pic23.png" height="400" width="900">
+        <p>We can copy past our key and then saving it as authorized_keys in /root/.ssh. Now we can SSH in from our terminal.</p>
+        <img src="./images/Kioptrix_Level_3/pic24.png" height="400" width="900">
+        <p>There is a congrats.txt file in the home folder</p>
+        <img src="./images/Kioptrix_Level_3/pic25.png" height="400" width="900">
+      </div> <!-- End of content div -->
+    </div> <!-- End of page-container div -->
+
+    <!-- scripts that are needed to provide functionality -->
+    <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
+
+  </body>
+</html>
