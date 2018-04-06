@@ -77,6 +77,11 @@ svg {
     height: 100%;
 }
 
+main {
+    width: 80vmin;
+    height: 60vmin;
+}
+
 @for $i from 1 through 88 {
     #svg_1 path:nth-child(#{$i}) {
         animation-name: path-random;
