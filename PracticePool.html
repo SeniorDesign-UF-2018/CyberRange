@@ -1,22 +1,23 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang"en">
+
   <head>
     <meta content="text/html" charset="utf-8">
     <meta name="Cyber Range" content="penetration testing">
-    <title>Tutorial Page</title>
-    <!-- stylsheets needed -->
+    <title>Practice Pool</title>
+
+    <!--Stylesheets needed -->
     <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap_darkly_theme.min.css">
-    <link rel="stylesheet" href="TutorialPage.css">
     <link rel="stylesheet" href="Essentials.css">
     <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
 
     <!--Responsiveness for mobile devices. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
   </head>
 
   <body>
+
     <!--NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Cyber-Range</a>
@@ -29,54 +30,48 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="TutorialPage.html">Tutorials</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="About.html">About</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="PracticePool.html">Practice Pool</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <!-- container that holds all of the contents of webpage -->
-    <div class="container-fluid">
-
-      <div id="content">
-
-        <!-- This is where the selected VM content will be displayed -->
-        <div id="right-content">
-            <!-- Where we display VM content -->
-            <div id="target">
-              <!--example of how the content is structured -->
-              <h2>Rickdiculously Easy</h2>
-              <div id="stars">&#9733; &#9733; &#9733; &#9734; &#9734;</div>
-              <p>This is a fedora server vm, created with virtualbox. It is a very simple Rick and Morty themed boot to root. There are 130 points worth of flags available (each flag has its points recorded with it), you should also get root. It's designed to be a beginner ctf, if you're new to pen testing, check it out!</p>
-              <!--<div class="download_button">Download</div>
-              <div class="walkthrough_button">Walkthrough</div>
-            -->
-              <button type="button" class="download_button btn btn-danger">Download</button>
-              <button type="button" class="walkthrough_button btn btn-danger">Walkthrough</button>
-            </div>
-        </div>
-
-        <!-- This is where the list of VMs will be displayed -->
-        <div id="vm_menu">
-          <h2>Select a VM to view more details</h2>
-          <div id="vm_list">
-            <!-- Example of what content looks like
-            <div class="vm_list_border vm_list_item" id="vm1">Walkthrough1</div>
-          -->
-          </div>
-        </div>
-
-      </div> <!-- End of content div -->
-
-
-    </div> <!-- End of page-container div -->
+    <!--Page content held here -->
+    <div class="container-fluid content">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>VM Name</th>
+            <th>Difficulty</th>
+            <th>Download Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>VM1 Test123 cool</td>
+            <td><div id="stars">&#9733; &#9733; &#9734; &#9734; &#9734;</div></td>
+            <td><a href="https://www.google.com/">Click here</a></td>
+          </tr>
+          <tr>
+            <td>VM2 Test123 cool</td>
+            <td><div id="stars">&#9733; &#9733; &#9733; &#9734; &#9734;</div></td>
+            <td><a href="https://www.google.com/">Click here</a></td>
+          </tr>
+          <tr>
+            <td>VM2 Test123 cool</td>
+            <td><div id="stars">&#9733; &#9734; &#9734; &#9734; &#9734;</div></td>
+            <td><a href="https://www.google.com/">Click here</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!--Footer -->
     <footer class="footer">
@@ -93,7 +88,6 @@
     <script src="js/popper.min.js" type="text/javascript"></script>
     <script src="js/tooltip.min.js" type="text/javascript"></script>
     <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-    <script src="TutorialPage.js" type="text/javascript"></script>
 
   </body>
 </html>

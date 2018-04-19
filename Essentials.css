@@ -6,6 +6,11 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-family: 'Gugi', cursive;
+}
+
+.content {
+  padding: 3%;
 }
 
 .footer {
@@ -20,4 +25,10 @@ body {
 
 #main-footer {
   text-align: center;
+}
+
+
+tr #stars {
+  font-size: 120%;
+  color: #E69F3C;
 }
