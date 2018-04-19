@@ -40,47 +40,22 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div id="main-page-content" class="container-fluid">
       <h1>Cyber Range</h1>
       <h3>A new way to learn Penetration Testing...</h3>
 
-      <section>
-        <pre><code id = 'one'>{</code></pre>
-        <pre><code id = 'two'>}</code></pre>
-        <span class='circle' id='c1'></span>
-        <span class='circle' id='c2'></span>
-        <span class='circle' id='c3'></span>
-        <span class='circle' id='c4'></span>
-        <span class='bar' id='bar1'></span>
-        <span class='bar' id='bar2'></span>
-        <span class='bar' id='bar3'></span>
-        <span class='circle' id='c5'></span><br>
-        <span class='circle' id='c6'></span>
-        <span class='bar' id='bar4'></span>
-        <span class='bar' id='bar5'></span>
-        <span class='bar' id='bar6'></span>
-        <span class='circle' id='c7'></span>
-        <span class='bar' id='bar7'></span>
-        <span class='circle' id='c8'></span>
-        <span class='circle' id='c9'></span><br>
-        <span class='bar' id='bar8'></span>
-        <span class='circle' id='c10'></span>
-        <span class='circle' id='c11'></span>
-        <span class='circle' id='c12'></span>
-        <span class='circle' id='c13'></span>
-        <span class='bar' id='bar9'></span>
-        <span class='circle' id='c14'></span>
-        <span class='bar' id='bar10'></span>
-        <span class='circle' id='c15'></span><br>
-        <span class='circle' id='c16'></span>
-        <span class='circle' id='c17'></span>
-        <span class='circle' id='c18'></span>
-        <span class='bar' id='bar11'></span>
-        <span class='bar' id='bar12'></span>
-        <span class='circle' id='c19'></span>
-        <span class='bar' id='bar13'></span>
-        <span class='circle' id='c20'></span>
-      </section>
+      <div id="logo">
+        <svg height="400" width="400">
+          <circle cx="110" cy="110" r="100" stroke="#4DBE91" stroke-width="6" fill-opacity="0.0" />
+          <circle cx="110" cy="110" r="80" stroke="#5292DE" stroke-width="6" fill-opacity="0.0" />
+          <circle cx="110" cy="110" r="60" stroke="#EAC054" stroke-width="6" fill-opacity="0.0" />
+          <circle cx="110" cy="110" r="20" stroke="#E9493C" stroke-width="6" fill="#E9493C" />
+        </svg>
+      </div>
+
+      <div style="text-align:center;">
+        <button type="button" id="start_button" class="btn btn-danger">Start Training</button>
+      </div>
 
     </div>
 
@@ -95,8 +70,10 @@
     </footer>
 
     <!-- scripts that are needed to provide functionality -->
+    <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="js/popper.min.js" type="text/javascript"></script>
     <script src="js/tooltip.min.js" type="text/javascript"></script>
     <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="main.js" type="text/javascript"></script>
   </body>
 </html>
