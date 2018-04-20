@@ -6,7 +6,30 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-size: 1.3vw;
   font-family: 'Gugi', cursive;
+}
+
+h1 {
+  font-size: 5vw;
+}
+
+h2 {
+  font-size: 3vw;
+}
+
+h3 {
+  font-size: 2vw;
+}
+
+button {
+  height: 3vw;
+  width: 12vw;
+}
+
+.button-text {
+  font-size: 1.3vw;
+  text-align: center;
 }
 
 .content {
